@@ -1,0 +1,109 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    color: #333;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    max-width: 100%;
+    margin-top: 12px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+#clear {
+    background-color: #b8c3cf;
+    color: #360202;
+}
+#clear:hover{
+    background-color: #051c34;
+    color: #fff;
+}
+#loading {
+    display: none; /* Hidden by default */
+    margin-top: 12px;
+    font-size: 18px;
+    color: #007bff;
+}
+
+#results {
+    display: none; /* Hidden by default */
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+#results p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+.inputContainer{
+    align-items: center;
+    justify-content: center;
+}
+
+#results img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 12px;
+}
+#videoTitle{
+    color: #007bff;
+    text-decoration: underline;
+}
+
+@keyframes jump {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+.dancing-text {
+    display: inline-block;
+}
+
+.dancing-text span {
+    display: inline-block;
+    animation: jump 1s ease-in-out infinite;
+}
+
+.no-animation span {
+    animation: none;
+}
+
+.dancing-text span:nth-child(1) { animation-delay: 0s; }
+.dancing-text span:nth-child(2) { animation-delay: 0.1s; }
+.dancing-text span:nth-child(3) { animation-delay: 0.2s; }
+.dancing-text span:nth-child(4) { animation-delay: 0.3s; }
+.dancing-text span:nth-child(5) { animation-delay: 0.4s; }
+.dancing-text span:nth-child(6) { animation-delay: 0.5s; }
+.dancing-text span:nth-child(7) { animation-delay: 0.6s; }
+
+

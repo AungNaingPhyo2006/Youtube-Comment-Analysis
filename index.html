@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Comments Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body >
+    <h1 id="animated-heading">YouTube Comments Analysis</h1>
+    <div class="inputContainer">
+        <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL">
+        <button onclick="fetchData()">Analyst</button>
+        <button  id="clear" onclick="clearInput()">Clear</button>
+    </div>
+   
+    <div id="loading">Loading...</div>
+    <h2 id="analysis" style="display: none;">Analysis Results</h2>
+    <div id="results">
+        <p id="videoTitle"></p>
+        <p id="avgPolarity"></p>
+        <p id="positiveCount"></p>
+        <p id="negativeCount"></p>
+        <p id="neutralCount"></p>
+        <img id="chart" alt="Sentiment Analysis Chart">
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
