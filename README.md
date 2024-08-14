@@ -1,4 +1,4 @@
-This is a new [**Python**]project.
+This is a Machine Learning [**Python**]project.
 
 # Getting Started
 
