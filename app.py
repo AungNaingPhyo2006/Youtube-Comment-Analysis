@@ -46,9 +46,13 @@ def get_comments(video_url):
         )
         response = request.execute()
         for item in response['items']:
-            comment = item['snippet']['topLevelComment']['snippet']
-            if comment['authorChannelId']['value'] != uploader_channel_id:
-                comments.append(comment['textDisplay'])
+            comment_snippet = item['snippet']['topLevelComment']['snippet']
+            if comment_snippet['authorChannelId']['value'] != uploader_channel_id:
+                comment_data = {
+                    'text': comment_snippet['textDisplay'],
+                    'author': comment_snippet['authorDisplayName']
+                }
+                comments.append(comment_data)
         nextPageToken = response.get('nextPageToken')
         if not nextPageToken:
             break
@@ -57,13 +61,13 @@ def get_comments(video_url):
     threshold_ratio = 0.65
     relevant_comments = []
     
-    for comment_text in comments:
-        comment_text = comment_text.lower().strip()
+    for comment in comments:
+        comment_text = comment['text'].lower().strip()
         emojis = emoji.emoji_count(comment_text)
         text_characters = len(re.sub(r'\s', '', comment_text))
         if (any(char.isalnum() for char in comment_text)) and not hyperlink_pattern.search(comment_text):
             if emojis == 0 or (text_characters / (text_characters + emojis)) > threshold_ratio:
-                relevant_comments.append(comment_text)
+                relevant_comments.append(comment)
     
     sentiment_object = SentimentIntensityAnalyzer()
     polarity = []
@@ -71,16 +75,22 @@ def get_comments(video_url):
     negative_comments = []
     neutral_comments = []
     
-    for items in relevant_comments:
-        sentiment_dict = sentiment_object.polarity_scores(items)
+    for comment in relevant_comments:
+        sentiment_dict = sentiment_object.polarity_scores(comment['text'])
         polarity.append(sentiment_dict['compound'])
+        comment['sentiment'] = sentiment_dict['compound']
         if sentiment_dict['compound'] > 0.05:
-            positive_comments.append(items)
+            positive_comments.append(comment)
         elif sentiment_dict['compound'] < -0.05:
-            negative_comments.append(items)
+            negative_comments.append(comment)
         else:
-            neutral_comments.append(items)
+            neutral_comments.append(comment)
     
+    # Ensure up to 10 comments per sentiment category
+    my_positive_comments = positive_comments[:10]
+    my_negative_comments = negative_comments[:10]
+    my_neutral_comments = neutral_comments[:10]
+
     avg_polarity = sum(polarity)/len(polarity) if polarity else 0
     positive_count = len(positive_comments)
     negative_count = len(negative_comments)
@@ -107,6 +117,9 @@ def get_comments(video_url):
         'positive_comments_count': positive_count,
         'negative_comments_count': negative_count,
         'neutral_comments_count': neutral_count,
+        'positive_comments': my_positive_comments,
+        'negative_comments': my_negative_comments,
+        'neutral_comments': my_neutral_comments,
         'chart': img_str
     }
     
@@ -114,4 +127,3 @@ def get_comments(video_url):
 
 if __name__ == '__main__':
     app.run(debug=True)
-

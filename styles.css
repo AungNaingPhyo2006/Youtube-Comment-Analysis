@@ -63,6 +63,7 @@ button:hover {
 #results p {
     font-size: 16px;
     margin: 8px 0;
+    color:#0056b3
 }
 .inputContainer{
     align-items: center;
@@ -106,4 +107,30 @@ button:hover {
 .dancing-text span:nth-child(6) { animation-delay: 0.5s; }
 .dancing-text span:nth-child(7) { animation-delay: 0.6s; }
 
+ul {
+    margin:  50px 0px;
+    list-style-type: none;
+    padding: 0 100px;
+}
 
+li {
+    margin-bottom: 10px;
+    padding: 19px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #a7b6ce;
+    color:#0a0a1a
+}
+#chart {
+    margin-bottom: 50px;
+}
+
+.comment-author {
+    font-weight: bold; 
+    color: #061f01; 
+    font-size: 1.1em; 
+    text-decoration: underline;
+}
+#titleColor{
+    color:#0056b3;
+}
